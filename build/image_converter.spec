@@ -4,14 +4,17 @@ from pathlib import Path
 
 from PyInstaller.utils.hooks import collect_submodules
 
-project_root = Path(__file__).resolve().parent.parent
+project_root = Path(SPECPATH).resolve().parent
 hiddenimports = collect_submodules("PIL")
 
 a = Analysis(
     [str(project_root / "app" / "main.py")],
     pathex=[str(project_root)],
     binaries=[],
-    datas=[(str(project_root / "config" / "default_settings.json"), "config")],
+    datas=[
+        (str(project_root / "config" / "default_settings.json"), "config"),
+        (str(project_root / "logo.ico"), "."),
+    ],
     hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
@@ -33,4 +36,5 @@ exe = EXE(
     strip=False,
     upx=True,
     console=False,
+    icon=str(project_root / "logo.ico"),
 )

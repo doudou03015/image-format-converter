@@ -107,7 +107,9 @@ python -m pytest -p no:cacheprovider
 
 ```powershell
 pyinstaller --noconfirm --clean --windowed --name 图片格式转换工具 `
+  --icon "logo.ico" `
   --add-data "config\\default_settings.json;config" `
+  --add-data "logo.ico;." `
   app\\main.py
 ```
 
@@ -119,7 +121,8 @@ pyinstaller build\image_converter.spec
 
 ### 打包资源处理说明
 
-- `config/default_settings.json` 必须通过 `--add-data` 或 spec 的 `datas` 打进包内
+- `config/default_settings.json` 和 `logo.ico` 必须通过 `--add-data` 或 spec 的 `datas` 打进包内
+- `logo.ico` 同时用于源码运行窗口图标、Windows 任务栏图标和打包后的 exe 图标
 - 用户运行后的设置文件和日志文件不会写到程序目录，而是写入用户目录
 - Windows 下通常位于：
 
